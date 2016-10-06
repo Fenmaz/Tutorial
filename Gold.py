@@ -25,7 +25,6 @@ def inp():
             elif char == "P":
                 player = (i, j)
                 grid[i, j] = 2
-    
     return grid, player
 
 

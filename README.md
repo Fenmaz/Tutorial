@@ -2,10 +2,15 @@
 For Tutorial class, Fall 2016, Macalester College.
 
 Problems so far:
+
 1. [A Classy Problem][1]
+
 2. [Counting Subsequences (Hard)][2]
+
 3. [Getting Gold][3]
+
 4. [Flowery Trails][4]
+
 5. [Disastrous Downtime][5]
 
 [1]: https://open.kattis.com/problems/classy

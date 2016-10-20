@@ -1,3 +1,8 @@
+import sys
+
+sys.setrecursionlimit(3000)
+
+
 def inp():
     first_line = input().split(" ")
     num_points, num_trails = int(first_line[0]), int(first_line[1])
@@ -27,7 +32,7 @@ def main():
     shortest_path = sum(trail_len.values())
     flower_path = set(trail_len.keys())
 
-    def dfs_recur(current_node, path):
+    def dfs_recur(current_node, path, length):
         # print(path)
         nonlocal shortest_path, flower_path
         if current_node == num_points - 1:
@@ -40,12 +45,13 @@ def main():
                 flower_path = flower_path.union(edges)
         else:
             for node in adj_lst[current_node]:
-                if node not in path:
+                edge_len = trail_len[frozenset((current_node, node))]
+                if node not in path and length + edge_len <= shortest_path:
                     path.append(node)
-                    dfs_recur(node, path)
+                    dfs_recur(node, path, length + edge_len)
                     path.pop()
 
-    dfs_recur(0, [0])
+    dfs_recur(0, [0], 0)
     # print(flower_path)
     return sum(trail_len[path] * trail_len_duplicate_count[path] for path in flower_path) * 2
 

@@ -52,5 +52,5 @@ def main():
             print(case[0])
         print("=" * 30)
 
-
-main()
+if __name__ == '__main__':
+    main()

@@ -57,6 +57,12 @@ def gold(grid, player):
     dfs(*player)
     return count
 
-g, p = inp()
-# print(p)
-print(gold(g, p))
+
+def main():
+    g, p = inp()
+    print(gold(g, p))
+
+
+if __name__ == '__main__':
+    main()
+

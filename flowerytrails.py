@@ -21,9 +21,9 @@ def inp():
 
 def main():
     num_points, adj_lst, trail_len, trail_len_duplicate_count = inp()
-    print(adj_lst)
-    print(trail_len)
-    print(trail_len_duplicate_count)
+    # print(adj_lst)
+    # print(trail_len)
+    # print(trail_len_duplicate_count)
     shortest_path = sum(trail_len.values())
     flower_path = set(trail_len.keys())
 
@@ -46,7 +46,7 @@ def main():
                     path.pop()
 
     dfs_recur(0, [0])
-    print(flower_path)
+    # print(flower_path)
     return sum(trail_len[path] * trail_len_duplicate_count[path] for path in flower_path) * 2
 
 if __name__ == '__main__':

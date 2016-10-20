@@ -52,6 +52,7 @@ def main():
     return sum(trail_len[path] * trail_len_duplicate_count[path] for path in flower_path) * 2
 
 if __name__ == '__main__':
-    import timeit
-    print(timeit.timeit("main()", setup="from __main__ import main"))
-
+    from time import clock
+    start_time = clock()
+    print(main())
+    print("Time = " + str(clock() - start_time))

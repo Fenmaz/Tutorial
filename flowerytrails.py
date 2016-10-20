@@ -26,9 +26,6 @@ def inp():
 
 def main():
     num_points, adj_lst, trail_len, trail_len_duplicate_count = inp()
-    # print(adj_lst)
-    # print(trail_len)
-    # print(trail_len_duplicate_count)
     shortest_path = sum(trail_len.values())
     flower_path = set(trail_len.keys())
 
@@ -37,7 +34,6 @@ def main():
         nonlocal shortest_path, flower_path
         if current_node == num_points - 1:
             edges = [frozenset((path[i], path[i+1])) for i in range(len(path) - 1)]
-            length = sum(trail_len[edge] for edge in edges)
             if length < shortest_path:
                 flower_path = set(edges)
                 shortest_path = length

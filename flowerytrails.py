@@ -52,4 +52,6 @@ def main():
     return sum(trail_len[path] * trail_len_duplicate_count[path] for path in flower_path) * 2
 
 if __name__ == '__main__':
-    print(main())
+    import timeit
+    print(timeit.timeit("main()", setup="from __main__ import main"))
+

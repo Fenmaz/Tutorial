@@ -23,11 +23,9 @@ def main():
     # print(trail_len)
     shortest_path = sum(trail_len.values())
     flower_path = set(trail_len.keys())
-    path = []
-    stack = [0]
-    while stack:
-        current_node = stack.pop()
-        path.append(current_node)
+
+    def dfs_recur(current_node, path):
+        nonlocal shortest_path, flower_path
         if current_node == num_points - 1:
             edges = [frozenset((path[i], path[i+1])) for i in range(len(path) - 1)]
             length = sum(trail_len[edge] for edge in edges)
@@ -36,15 +34,11 @@ def main():
                 shortest_path = length
             elif length == shortest_path:
                 flower_path = flower_path.union(edges)
-            path.pop()
-        else:
-            delete_node = True
-            for node in adj_lst[current_node]:
-                if node not in path:
-                    stack.append(node)
-                    delete_node = False
-            if delete_node:
-                path.pop()
+        for node in adj_lst[current_node]:
+            if node not in path:
+                dfs_recur(node, path.copy().append(node))
+
+    dfs_recur(0, [0])
     print(flower_path)
     return sum(trail_len[path] for path in flower_path) * 2
 

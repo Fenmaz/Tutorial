@@ -16,11 +16,11 @@ def inp():
             adj_lst[node1].add(node2)
             adj_lst[node2].add(node1)
             key = frozenset((node1, node2))
-            if key in trail_len and length >= trail_len[key]:
-                trail_len_duplicate_count[key] += 1 if length == trail_len[key] else 0
-            else:
+            if key not in trail_len or length < trail_len[key]:
                 trail_len[key] = length
                 trail_len_duplicate_count[key] = 1
+            elif length = trail_len.get(key):
+                trail_len_duplicate_count[key] += 1
     return num_points, adj_lst, trail_len, trail_len_duplicate_count
 
 

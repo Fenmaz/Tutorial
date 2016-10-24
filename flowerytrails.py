@@ -1,4 +1,6 @@
 from queue import PriorityQueue
+# from time import clock
+
 
 def inp():
     first_line = input().split(" ")
@@ -13,37 +15,48 @@ def inp():
             adj_lst[node1].add(node2)
             adj_lst[node2].add(node1)
             key = frozenset((node1, node2))
-            if key in trail_len and length >= trail_len[key]:
-                trail_len_duplicate_count[key] += 1 if length == trail_len[key] else 0
-            else:
+            if key not in trail_len or length < trail_len[key]:
                 trail_len[key] = length
                 trail_len_duplicate_count[key] = 1
+            elif length == trail_len.get(key):
+                trail_len_duplicate_count[key] += 1
+
     return num_points, adj_lst, trail_len, trail_len_duplicate_count
 
 
 def main():
     num_points, adj_lst, trail_len, trail_len_duplicate_count = inp()
-    shortest_path = sum(trail_len.values())
-    flower_path = set(trail_len.keys())
-    queue = Queue()
-    visited = {node: False for node in nodes}
-    prev = {}
-    queue.add((0, 0))
-    visited[0] = True
+    shortest_path = 0
+    queue = PriorityQueue()
+    dist = {0: 0}
+    prev = {0: []}
+    queue.put((0, 0))
 
     while not queue.empty():
         current_dist, current_node = queue.get()
-        if current_dist > shortest_path:
+        if shortest_path and current_dist > shortest_path:
             break
         if current_node == num_points - 1:
             shortest_path = current_dist
+            continue
         for neighbor in adj_lst[current_node]:
-            if not visited[neighbor]:
-                queue.put((
+            alt = current_dist + trail_len[frozenset((current_node, neighbor))]
+            if neighbor not in dist or alt <= dist[neighbor]:
+                queue.put((alt, neighbor))
+                prev.setdefault(neighbor, []).append(current_node)
+                dist[neighbor] = alt
+
+    stack = [num_points - 1]
+    flower_path = set()
+    while stack:
+        node = stack.pop()
+        for neighbor in prev[node]:
+            flower_path.add(frozenset((node, neighbor)))
+            stack.append(neighbor)
     # print(flower_path)
     return sum(trail_len[path] * trail_len_duplicate_count[path] for path in flower_path) * 2
 
 if __name__ == '__main__':
-    import timeit
-    print(timeit.timeit("main()", setup="from __main__ import main"))
-
+    # start_time = clock()
+    print(main())
+    # print("Time: {:.4f}".format(clock() - start_time))

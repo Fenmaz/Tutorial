@@ -1,5 +1,4 @@
 from queue import PriorityQueue
-# from time import clock
 
 
 def inp():
@@ -28,15 +27,15 @@ def main():
     num_points, adj_lst, trail_len, trail_len_duplicate_count = inp()
     shortest_path = 0
     queue = PriorityQueue()
-    dist = {0: 0}
-    prev = {0: []}
-    queue.put((0, 0))
+    dist = {num_points - 1: 0}
+    prev = {num_points - 1: []}
+    queue.put((0, num_points - 1))
 
     while not queue.empty():
         current_dist, current_node = queue.get()
         if shortest_path and current_dist > shortest_path:
             break
-        if current_node == num_points - 1:
+        if current_node == 0:
             shortest_path = current_dist
             continue
         for neighbor in adj_lst[current_node]:
@@ -46,7 +45,7 @@ def main():
                 prev.setdefault(neighbor, []).append(current_node)
                 dist[neighbor] = alt
 
-    stack = [num_points - 1]
+    stack = [0]
     flower_path = set()
     while stack:
         node = stack.pop()
@@ -57,6 +56,7 @@ def main():
     return sum(trail_len[path] * trail_len_duplicate_count[path] for path in flower_path) * 2
 
 if __name__ == '__main__':
+    # from time import clock
     # start_time = clock()
     print(main())
     # print("Time: {:.4f}".format(clock() - start_time))

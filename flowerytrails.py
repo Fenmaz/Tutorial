@@ -37,7 +37,7 @@ def main():
             break
         if current_node == num_points - 1:
             shortest_path = current_dist
-        for neighbor in adj_lst[node]:
+        for neighbor in adj_lst[current_node]:
             if not visited[neighbor]:
                 queue.put((
     # print(flower_path)

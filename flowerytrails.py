@@ -19,30 +19,32 @@ def inp():
             if key not in trail_len or length < trail_len[key]:
                 trail_len[key] = length
                 trail_len_duplicate_count[key] = 1
-            elif length = trail_len.get(key):
+            elif length == trail_len.get(key):
                 trail_len_duplicate_count[key] += 1
     return num_points, adj_lst, trail_len, trail_len_duplicate_count
 
 
 def main():
     num_points, adj_lst, trail_len, trail_len_duplicate_count = inp()
-    shortest_path = sum(trail_len.values())
-    flower_path = set(trail_len.keys())
+    shortest_path = 0
+    flower_path = set()
 
     def dfs_recur(current_node, path, length):
         # print(path)
         nonlocal shortest_path, flower_path
+        if shortest_path and length > shortest_path:
+            return
         if current_node == num_points - 1:
-            edges = [frozenset((path[i], path[i+1])) for i in range(len(path) - 1)]
-            if length < shortest_path:
-                flower_path = set(edges)
+            edges = set(frozenset((path[i], path[i+1])) for i in range(len(path) - 1))
+            if not shortest_path or length < shortest_path:
+                flower_path = edges
                 shortest_path = length
             elif length == shortest_path:
-                flower_path = flower_path.union(edges)
+                flower_path |= edges
         else:
             for node in adj_lst[current_node]:
                 edge_len = trail_len[frozenset((current_node, node))]
-                if node not in path and length + edge_len <= shortest_path:
+                if node not in path:
                     path.append(node)
                     dfs_recur(node, path, length + edge_len)
                     path.pop()
@@ -52,7 +54,7 @@ def main():
     return sum(trail_len[path] * trail_len_duplicate_count[path] for path in flower_path) * 2
 
 if __name__ == '__main__':
-    from time import clock
-    start_time = clock()
+    # from time import clock
+    # start_time = clock()
     print(main())
-    print("Time = " + str(clock() - start_time))
+    # print("Time =  {:.4f}".format(clock() - start_time))

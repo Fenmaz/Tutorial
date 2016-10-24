@@ -1,7 +1,4 @@
-import sys
-
-sys.setrecursionlimit(3000)
-
+from queue import PriorityQueue
 
 def inp():
     first_line = input().split(" ")
@@ -28,26 +25,21 @@ def main():
     num_points, adj_lst, trail_len, trail_len_duplicate_count = inp()
     shortest_path = sum(trail_len.values())
     flower_path = set(trail_len.keys())
+    queue = Queue()
+    visited = {node: False for node in nodes}
+    prev = {}
+    queue.add((0, 0))
+    visited[0] = True
 
-    def dfs_recur(current_node, path, length):
-        # print(path)
-        nonlocal shortest_path, flower_path
+    while not queue.empty():
+        current_dist, current_node = queue.get()
+        if current_dist > shortest_path:
+            break
         if current_node == num_points - 1:
-            edges = [frozenset((path[i], path[i+1])) for i in range(len(path) - 1)]
-            if length < shortest_path:
-                flower_path = set(edges)
-                shortest_path = length
-            elif length == shortest_path:
-                flower_path = flower_path.union(edges)
-        else:
-            for node in adj_lst[current_node]:
-                edge_len = trail_len[frozenset((current_node, node))]
-                if node not in path and length + edge_len <= shortest_path:
-                    path.append(node)
-                    dfs_recur(node, path, length + edge_len)
-                    path.pop()
-
-    dfs_recur(0, [0], 0)
+            shortest_path = current_dist
+        for neighbor in adj_lst[node]:
+            if not visited[neighbor]:
+                queue.put((
     # print(flower_path)
     return sum(trail_len[path] * trail_len_duplicate_count[path] for path in flower_path) * 2
 

@@ -13,8 +13,17 @@ Problems so far:
 
 5. [Disastrous Downtime][5]
 
+6. [Virus Replication][6]
+
+7. [Cheating a Boolean Tree][7]
+
+8. [Ship Traffic][8]
+
 [1]: https://open.kattis.com/problems/classy
 [2]: https://open.kattis.com/problems/subseqhard
 [3]: https://open.kattis.com/problems/gold
 [4]: https://open.kattis.com/problems/flowerytrails
 [5]: https://open.kattis.com/problems/downtime
+[6]: https://open.kattis.com/problems/virus
+[7]: https://open.kattis.com/problems/cheatingbooleantree
+[8]: https://open.kattis.com/problems/ship

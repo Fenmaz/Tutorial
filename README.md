@@ -1,5 +1,5 @@
 # Programming Problem Practicum
-For Tutorial/Programming Problen Practicum class, Fall 2016, Macalester College.
+For Tutorial/Programming Problem Practicum class, Fall 2016, Macalester College.
 
 Problems so far:
 

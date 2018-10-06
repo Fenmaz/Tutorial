@@ -1,5 +1,6 @@
-# Programming Problem Practicum
-For Tutorial/Programming Problem Practicum class, Fall 2016, Macalester College.
+# Programming Problems
+
+Programming problems from (Open Kattis)[https://open.kattis.com/].
 
 Problems so far:
 
